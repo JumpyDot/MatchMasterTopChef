@@ -79,6 +79,11 @@ module.exports = function(grunt) {
 
         /* Copy the minified files to the destination folders so we stay in-sync */
         exec: {
+			copyin: {
+				command: 'sh ./copyin.sh',
+				stdout: true,
+				stderr: true
+			},
             copymin: {
                 command: 'cp distrib/js/MemoryMatch.min.js source/js/MemoryMatch.min.js && cp distrib/js/MemoryMatch.min.js ../../websites/enginesis/public/games/TopChefMemoryChallenge/js/MemoryMatch.min.js',
                 stdout: true,
@@ -89,7 +94,9 @@ module.exports = function(grunt) {
                 stdout: true,
                 stderr: true
             }
-        }
+        },
+
+        /* Copy the project files from the test area into the source folder */
     });
 
     // Tell Grunt we plan to use these plug-ins:
@@ -100,7 +107,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-exec');
 
     // Tell Grunt what to do when we type "grunt" into the terminal.
-    grunt.registerTask('default', ['concat', 'uglify', 'exec']);
-    grunt.registerTask('release', ['concat', 'uglify', 'imagemin', 'exec']);
+    grunt.registerTask('default', ['exec:copyin', 'concat', 'uglify', 'exec:copymin', 'exec:copyenginesismin']);
+    grunt.registerTask('release', ['exec:copyin', 'concat', 'uglify', 'imagemin', 'exec:copymin', 'exec:copyenginesismin']);
 
 };
