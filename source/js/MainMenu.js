@@ -240,7 +240,12 @@ MemoryMatch.MainMenu = {
             gameScoresCollection,
             gameScoreData,
             totalGamesPlayed,
-            gamesUnlocked;
+            gamesUnlocked,
+            levelTextField,
+            levelTextFieldSize,
+            levelTitle,
+            titleOffset,
+            spriteSize;
 
         if (mapLevelPositions == null || levelData == null) {
             return;
@@ -314,6 +319,30 @@ MemoryMatch.MainMenu = {
             levelButton.y = levelMapPosition.y * MemoryMatch.stageScaleFactor;
             levelButton.name = this.makeLevelButtonName(landNumber, levelNumber);
             this.groupDisplayObject.addChild(levelButton);
+
+            // Show the level title under the challenge button
+            spriteSize = MemoryMatch.getSpriteFrameSize(MemoryMatch.GameSetup.mapSpritesheetFrames, 'bossBaseLand' + landNumber.toString());
+            spriteSize.width *= buttonScale;
+            spriteSize.height *= buttonScale;
+            levelTitle = levelData[landIndex].title;
+            titleOffset = levelData[landIndex].titleOffset;
+            if (titleOffset == null) {
+                titleOffset = {x: 0, y: 0};
+            }
+            levelTextField = new createjs.Text(levelTitle, MemoryMatch.getScaledFontSize(36) + " " + MemoryMatch.GameSetup.guiMediumFontName, levelData[landIndex].titleColor);
+            levelTextField.name = 'levelTitleLand' + landIndex.toString();
+            levelTextField.textAlign = "left";
+            levelTextFieldSize = levelTextField.getBounds();
+            levelTextField.x = levelButton.x + (titleOffset.x * MemoryMatch.stageScaleFactor);
+            levelTextField.y = levelButton.y + (titleOffset.y * MemoryMatch.stageScaleFactor) + levelTextFieldSize.height;
+            levelTextField.lineHeight = levelTextFieldSize.height * 1.2;
+            if (levelData[landIndex].titleMaxWidth != null) {
+                levelTextField.lineWidth = levelData[landIndex].titleMaxWidth * MemoryMatch.stageScaleFactor;
+            } else {
+                levelTextField.lineWidth = levelTextFieldSize.width;
+            }
+            this.groupDisplayObject.addChild(levelTextField);
+
             levelIndexLandOffset += levelData[landIndex].gameCount + 1;
         }
     },
@@ -398,6 +427,7 @@ MemoryMatch.MainMenu = {
             if (levelButton != null) {
                 levelButton.refreshButton({starsEarned: starsEarned, bestScore: bestScore, wasPlayed: wasPlayed, isLocked: isLocked});
             }
+
             levelIndexLandOffset += levelData[landIndex].gameCount + 1;
         }
         this.showAwardedGems();

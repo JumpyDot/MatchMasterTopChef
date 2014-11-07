@@ -11,7 +11,7 @@ var enginesisSession = enginesis || {};
 
 
 this.MemoryMatch = {
-    GameVersion: "1.1.89",
+    GameVersion: "1.1.91",
     platform: "unknown",
     locale: "en-US",
     debugMode: false,
@@ -6053,7 +6053,7 @@ this.MemoryMatch = {
             if (createjs.Sound.BrowserDetect.isIOS || createjs.Sound.BrowserDetect.isAndroid) {
                 MemoryMatch.debugLog("CreateJS.Sound error iOS or Android issues!");
             }
-            createjs.Sound.registerPlugins([createjs.HTMLAudioPlugin, createjs.WebAudioPlugin, createjs.FlashPlugin]);
+            createjs.Sound.registerPlugins([createjs.WebAudioPlugin, createjs.HTMLAudioPlugin]);
             createjs.Sound.alternateExtensions = ["mp3"];
         }
         MemoryMatch.assetLoader = assetLoader;

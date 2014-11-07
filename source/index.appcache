@@ -1,5 +1,5 @@
 CACHE MANIFEST
-# 2014-11-03:v1.1.89.2
+# 2014-11-07:v1.1.91.1
 CACHE:
 index.html
 assets/memoryMatch.css
@@ -9,7 +9,7 @@ lib/jquery.min.js
 lib/modernizr.custom.74056.js
 lib/preloadjs-NEXT.min.js
 lib/soundjs-NEXT.min.js
-lib/easeljs-0.7.1.min.js
+lib/easeljs-NEXT.min.js
 lib/enginesis.min.js
 lib/screenfull.min.js
 js/setup.js
@@ -47,9 +47,6 @@ assets/close_btn_up.png
 assets/shareicons-24.png
 assets/shareicons-50.png
 assets/shareicons-100.png
-assets/shareicons-24.json
-assets/shareicons-50.json
-assets/shareicons-100.json
 assets/sparkle_21x23.png
 assets/guiSpriteSheet1-24.png
 assets/guiSpriteSheet1-50.png
