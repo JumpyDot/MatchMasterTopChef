@@ -5776,7 +5776,7 @@ this.MemoryMatch = {
     },
 
     getAppInfo: function () {
-        return MemoryMatch.GameSetup.gameTitle + " version " + MemoryMatch.GameVersion + " on " + MemoryMatch.platform + " " + MemoryMatch.locale + (MemoryMatch.isTouchDevice ? ", Touch" : ", Mouse") + (MemoryMatch.isIFrame() ? ', iframe' : ', standalone') + (MemoryMatch.isNativeBuild ? ', Native' : ', Web') + " scale:" + MemoryMatch.stageScaleFactor;
+        return MemoryMatch.GameSetup.gameTitle + " version " + MemoryMatch.GameVersion + " on " + MemoryMatch.platform + " " + MemoryMatch.locale + (MemoryMatch.isTouchDevice ? ", Touch" : ", Mouse") + (MemoryMatch.isIFrame() ? ', iframe' : ', standalone') + (MemoryMatch.isNativeBuild ? ', Native' : ', Web') + ", scale:" + MemoryMatch.stageScaleFactor;
     },
 
     onVisibilityChange: function (event) {

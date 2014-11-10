@@ -434,7 +434,11 @@ MemoryMatch.GameResults = {
 
         // position badges relative to award position, accounting for the center registration of the award sprite
         spriteFrame = 'mapAwardEmpty';
-        emptySpriteSource = new createjs.Sprite(spriteData, spriteFrame);
+        if (spriteFrames.animations[spriteFrame] != null) {
+            emptySpriteSource = new createjs.Sprite(spriteData, spriteFrame);
+        } else {
+            emptySpriteSource = null;
+        }
         spriteFrame = 'mapAwardLand';
         position.x -= spriteSize.width * 0.5 * awardScale;
         position.y -= spriteSize.height * 0.5 * awardScale;
@@ -442,13 +446,15 @@ MemoryMatch.GameResults = {
             badgePosition = MemoryMatch.GameSetup.levels[i].gemPosition;
             landNumber = i + 1;
             badgeName = spriteFrame + landNumber.toString();
-            if (i > 0) {
-                emptySprite = emptySpriteSource.clone();
-            } else {
-                emptySprite = emptySpriteSource;
+            if (emptySpriteSource != null) {
+                if (i > 0) {
+                    emptySprite = emptySpriteSource.clone();
+                } else {
+                    emptySprite = emptySpriteSource;
+                }
+                emptySprite.setTransform(position.x + (badgePosition.x * awardScale * MemoryMatch.stageScaleFactor), position.y + (badgePosition.y * awardScale * MemoryMatch.stageScaleFactor), awardScale, awardScale);
+                this.groupDisplayObject.addChild(emptySprite);
             }
-            emptySprite.setTransform(position.x + (badgePosition.x * awardScale * MemoryMatch.stageScaleFactor), position.y + (badgePosition.y * awardScale * MemoryMatch.stageScaleFactor), awardScale, awardScale);
-            this.groupDisplayObject.addChild(emptySprite);
             imageSprite = new createjs.Sprite(spriteData, badgeName);
             imageSprite.setTransform(position.x + (badgePosition.x * awardScale * MemoryMatch.stageScaleFactor), position.y + (badgePosition.y * awardScale * MemoryMatch.stageScaleFactor), awardScale, awardScale);
             imageSprite.name = badgeName;

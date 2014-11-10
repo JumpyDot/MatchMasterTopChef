@@ -435,19 +435,25 @@ MemoryMatch.AwardsPopup = {
 
         // position badges relative to award position, accounting for the center registration of the award sprite
         spriteFrame = 'mapAwardEmpty';
-        emptySpriteSource = new createjs.Sprite(spriteData, spriteFrame);
+        if (spriteFrames.animations[spriteFrame] != null) {
+            emptySpriteSource = new createjs.Sprite(spriteData, spriteFrame);
+        } else {
+            emptySpriteSource = null;
+        }
         spriteFrame = 'mapAwardLand';
         position = {x: 0, y: 0};
         for (i = 0; i < numberOfLevels; i ++) {
             badgePosition = MemoryMatch.GameSetup.levels[i].gemPosition;
             landNumber = i + 1;
-            if (i > 0) {
-                emptySprite = emptySpriteSource.clone();
-            } else {
-                emptySprite = emptySpriteSource;
+            if (emptySpriteSource != null) {
+                if (i > 0) {
+                    emptySprite = emptySpriteSource.clone();
+                } else {
+                    emptySprite = emptySpriteSource;
+                }
+                emptySprite.setTransform((position.x + (badgePosition.x * MemoryMatch.stageScaleFactor)) | 0, (position.y + (badgePosition.y * MemoryMatch.stageScaleFactor)) | 0);
+                awardDisplayObject.addChild(emptySprite);
             }
-            emptySprite.setTransform((position.x + (badgePosition.x * MemoryMatch.stageScaleFactor)) | 0, (position.y + (badgePosition.y * MemoryMatch.stageScaleFactor)) | 0);
-            awardDisplayObject.addChild(emptySprite);
             badgeName = spriteFrame + landNumber.toString();
             imageSprite = new createjs.Sprite(spriteData, badgeName);
             imageSprite.setTransform(position.x + (badgePosition.x * MemoryMatch.stageScaleFactor), position.y + (badgePosition.y * MemoryMatch.stageScaleFactor), 1, 1);
