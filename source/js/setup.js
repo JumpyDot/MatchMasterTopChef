@@ -17,7 +17,7 @@ MemoryMatch.GameSetup = {
     gameKey: '8eec6164bf13799cc11fb10d7b296c69',
     siteDomain: 'bravotv.com',
     twitterId: '@bravotv',
-    socialHashTag: '#tcmc',
+    socialHashTag: '',
     facebookAppId: '587652661341236',
     googlePlusClientId: '1074321455870-a4ced89t08vig40dtsjt8rmnljmals53.apps.googleusercontent.com',
     googleAnalyticsAccountId: 'UA-13133265-1',
